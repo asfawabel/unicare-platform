@@ -60,3 +60,48 @@ footer { background: var(--educare-forest-strong); }
 .studio-card .upload-drop input{border:0;background:transparent;max-width:100%;font-size:11px}.lesson-video{margin-top:24px;background:#112d25;border-radius:12px;overflow:hidden;min-height:120px;display:grid;place-items:center;color:#fff}
 .lesson-video video{display:block;width:100%;max-height:520px;aspect-ratio:16/9;background:#112d25}.lesson-video p{padding:25px}
 @media(max-width:800px){.studio-grid{grid-template-columns:1fr}.studio-card{padding:20px}}
+
+/* EduCare page transitions: quick, subtle and motion-accessible. */
+@keyframes educare-page-enter {
+  from {opacity:.78;transform:translateY(8px)}
+  to {opacity:1;transform:translateY(0)}
+}
+/* Sections are conditionally mounted when navigating; animation only runs on entry. */
+.section, .hero, .closing {animation:educare-page-enter 220ms cubic-bezier(.2,.7,.2,1) both;}
+.course-loading-bar {position:sticky;top:0;height:3px;width:100%;z-index:20;overflow:hidden;background:rgba(35,88,65,.11);}
+.course-loading-bar span {display:block;width:35%;height:100%;background:#3c8063;animation:educare-loading-slide 1s ease-in-out infinite;}
+@keyframes educare-loading-slide {0%{transform:translateX(-110%)}100%{transform:translateX(390%)}}
+button, a { -webkit-tap-highlight-color:transparent; }
+@media (prefers-reduced-motion:reduce) {
+  .section, .hero, .closing {animation:none!important;}
+  .course-loading-bar span {animation:none!important;width:100%;}
+}
+
+/* EduCare brand & profile polish */
+.brand { background:transparent; border:0; padding:0; flex-shrink:0; cursor:pointer; color:inherit; text-align:left; }
+.brand-mark { flex:0 0 42px; width:42px; height:42px; border-radius:13px; }
+.brand-word { display:inline-flex; align-items:baseline; font-family:Manrope,sans-serif; font-weight:800; font-size:24px; line-height:1.2; letter-spacing:-1.2px; }
+.brand-word .brand-thin { font-size:inherit; font-weight:500; }
+.brand-word b { font-size:inherit; }
+.brand-by { align-self:center; margin:0 0 0 9px; font-size:11px; letter-spacing:0; }
+/* Original footer CSS targets ALL nested spans; restore the wordmark's size and spacing. */
+.footer .brand { color:#fff; }
+.footer .brand .brand-mark { color:var(--educare-forest); }
+.footer .brand .brand-word, .footer .brand .brand-word .brand-thin, .footer .brand .brand-word b { font-size:23px; }
+.footer .brand .brand-by { font-size:11px; color:#c2d6c8; }
+.profile-wrap { position:relative; flex-shrink:0; }
+.profile-chevron { transition:transform 180ms ease; }
+.profile-chevron.open { transform:rotate(90deg); }
+.profile-menu { position:absolute; right:0; top:calc(100% + 10px); min-width:245px; max-width:min(330px,calc(100vw - 28px)); z-index:50; padding:9px; border:1px solid var(--educare-border); border-radius:13px; background:#fff; color:var(--educare-forest); box-shadow:0 14px 45px #10362924; }
+.profile-meta { display:flex; flex-direction:column; gap:5px; padding:11px 11px 14px; border-bottom:1px solid var(--educare-border); margin-bottom:5px; }
+.profile-meta strong { font-size:13px; }
+.profile-meta span { font-size:11px; color:var(--educare-muted); overflow-wrap:anywhere; }
+.profile-menu button { width:100%; display:flex; align-items:center; gap:12px; border:0; border-radius:8px; background:transparent; color:var(--educare-forest); text-align:left; padding:12px; font-size:13px; font-weight:700; }
+.profile-menu button:hover, .profile-menu button:focus-visible { background:var(--educare-sage-soft); }
+.profile-separator { border-top:1px solid var(--educare-border); margin:5px 0; }
+.profile-menu .profile-signout { color:#a33b3b; }
+.brand:focus-visible, .account:focus-visible { outline:3px solid #85b28c; outline-offset:4px; }
+@media (max-width:950px) { .brand-by { display:none; } }
+@media (max-width:700px) { .nav { gap:12px; } .brand-word { font-size:21px; } .brand-mark { width:36px; height:36px; flex-basis:36px; } .account { gap:6px; padding:10px; } }
+@media (max-width:390px) { .account-name { max-width:75px; overflow:hidden; text-overflow:ellipsis; } .brand-word { font-size:19px; } }
+@media (prefers-reduced-motion:reduce) { .profile-chevron {transition:none} }
