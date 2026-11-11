@@ -8,7 +8,8 @@
     "start": "node dist/index.js",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "admin:promote": "tsx scripts/promote.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",
@@ -19,7 +20,8 @@
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "zod": "^3.24.1",
-    "express-rate-limit": "^7.5.0"
+    "express-rate-limit": "^7.5.0",
+    "multer": "^2.0.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -29,6 +31,7 @@
     "@types/node": "^22.10.5",
     "prisma": "^6.1.0",
     "tsx": "^4.19.2",
-    "typescript": "~5.7.3"
+    "typescript": "~5.7.3",
+    "@types/multer": "^2.0.0"
   }
 }

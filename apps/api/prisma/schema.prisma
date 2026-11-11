@@ -33,6 +33,9 @@ model Lesson {
   content String @db.Text
   position Int
   progress LessonProgress[]
+  videoPath String?
+  videoMime String?
+  videoOriginalName String?
   @@unique([courseId, position])
 }
 model Enrollment {

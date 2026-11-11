@@ -45,3 +45,18 @@ body { background: #f5f7f0; color: var(--educare-forest); }
 footer { background: var(--educare-forest-strong); }
 .modal input { outline-color: #729b75; }
 @media(max-width:700px) { .navlinks { background: #f9fbf4; } }
+
+/* Educator studio — matched to the EduCare sage palette */
+.studio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:26px}
+.studio-card{background:#fff;border:1px solid var(--educare-border);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:17px}
+.studio-card h3{font:800 21px Manrope;margin:0;display:flex;align-items:center;gap:10px;color:var(--educare-forest)}
+.studio-card p{font-size:13px;color:var(--educare-muted);line-height:1.7;margin:0}
+.studio-card label{font-size:12px;color:var(--educare-forest);font-weight:800;display:flex;flex-direction:column;gap:7px}
+.studio-card input,.studio-card textarea,.studio-card select{padding:12px 13px;border:1px solid var(--educare-border);border-radius:8px;background:#fcfdf9;color:var(--educare-forest);width:100%;font:inherit;outline-color:#719969}
+.studio-card textarea{resize:vertical;min-height:90px}
+.studio-card .btn{align-self:start}.studio-course{display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid var(--educare-border);padding:12px 0}
+.studio-course div{display:grid;gap:6px}.studio-course small{color:var(--educare-muted)}.studio-course button{background:var(--educare-sage);color:var(--educare-forest);border:0;padding:10px 13px;border-radius:7px;font-weight:800}
+.studio-card .upload-drop{border:2px dashed #aac9a1;border-radius:11px;background:#f3f8eb;align-items:center;justify-content:center;padding:30px;text-align:center;cursor:pointer}
+.studio-card .upload-drop input{border:0;background:transparent;max-width:100%;font-size:11px}.lesson-video{margin-top:24px;background:#112d25;border-radius:12px;overflow:hidden;min-height:120px;display:grid;place-items:center;color:#fff}
+.lesson-video video{display:block;width:100%;max-height:520px;aspect-ratio:16/9;background:#112d25}.lesson-video p{padding:25px}
+@media(max-width:800px){.studio-grid{grid-template-columns:1fr}.studio-card{padding:20px}}
