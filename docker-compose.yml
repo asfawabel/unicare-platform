@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: unicare
+      POSTGRES_PASSWORD: localdevpassword
+      POSTGRES_DB: unicare
+    ports:
+      - "5432:5432"
+    volumes:
+      - unicare_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U unicare -d unicare"]
+      interval: 5s
+      retries: 10
+volumes:
+  unicare_pg:

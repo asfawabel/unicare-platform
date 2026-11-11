@@ -1,0 +1,18 @@
+{
+  "name": "unicare-platform",
+  "private": true,
+  "workspaces": [
+    "apps/site",
+    "apps/learn",
+    "apps/api"
+  ],
+  "scripts": {
+    "dev:site": "npm run dev -w @unicare/site",
+    "dev:learn": "npm run dev -w @unicare/learn",
+    "dev:api": "npm run dev -w @unicare/api",
+    "build": "npm run build -w @unicare/site && npm run build -w @unicare/learn && node scripts/assemble.mjs",
+    "db:generate": "npm run db:generate -w @unicare/api",
+    "db:migrate": "npm run db:migrate -w @unicare/api",
+    "db:seed": "npm run db:seed -w @unicare/api"
+  }
+}
