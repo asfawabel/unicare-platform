@@ -1,25 +1,48 @@
+
 name: Deploy React apps to GitHub Pages
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: pages
   cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '22'
-      - run: npm install --no-audit --no-fund
-      - name: Build both apps
+          node-version: '24'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --include=dev --no-audit --no-fund
+
+      - name: Verify API configuration
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+        run: |
+          if [ -z "$VITE_API_URL" ]; then
+            echo "::error::VITE_API_URL is missing from GitHub Actions variables"
+            exit 1
+          fi
+          echo "API URL is configured"
+
+      - name: Build UniCare and EduCare
         run: npm run build
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
@@ -27,15 +50,25 @@ jobs:
           VITE_LEARN_PATH: /${{ github.event.repository.name }}/learn/
           VITE_SITE_PATH: /${{ github.event.repository.name }}/
           VITE_LEARN_BASE_PATH: /${{ github.event.repository.name }}/learn/
-      - uses: actions/upload-pages-artifact@v3
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+
   deploy:
+    name: Deploy to GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
     needs: build
+
     steps:
-      - id: deployment
+      - name: Deploy website
+        id: deployment
         uses: actions/deploy-pages@v4
